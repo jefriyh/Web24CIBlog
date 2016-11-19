@@ -1,9 +1,14 @@
 <?php
 
-class User_model extends CI_Model{
+class Post_model extends CI_Model{
 
-	function user_view_all(){
-		return $this->db->get("user");
+	function post_view_all(){
+		return $this->db->get("post");
+	}
+
+	function post_view_user($id){
+		$this->db->where('id_user', $id);
+		return $this->db->get('post');
 	}
 
 	function tambah_data($data, $table){
@@ -24,25 +29,6 @@ class User_model extends CI_Model{
 		$this->db->delete($table);
 	}
 
-	function login($email, $password){
-		$this->db->where('email', $email);
-		$this->db->where('password', $password);
-		$this->db->limit(1);
-		$query = $this->db->get('user');
-		if($query->num_rows()==1){
-			return $query->result();
-		}
-		else{
-			return false;
-		}
-	}
+
+
 }
-
-
-
-
-
-
-
-
-
